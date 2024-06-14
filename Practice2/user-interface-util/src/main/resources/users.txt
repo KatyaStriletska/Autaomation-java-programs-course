@@ -1,0 +1,3 @@
+User{login='user1', password='$2a$10$8lxR.tSIgXjPiYvPe2w7zu72WbFpPVQNYdVIXhrzIVM3t5MiiR6lS', age=19, name='Viktoriia Pushka'}
+User{login='user2', password='$2a$10$aHMumV5Epl/p6xlWgcjjiOvNyLIajNA1FbflBbqhE7Q1ShPHL.Nmm', age=21, name='Polina Tkach'}
+User{login='user3', password='$2a$10$i9WjsC3aQQvZObPaGXt5N.z.QGxj3ZST6dT02QYtx/Hpu1TBtBdm2', age=21, name='Mariia Nepyivoda'}

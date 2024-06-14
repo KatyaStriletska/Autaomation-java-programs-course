@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+          
+  
+  
+  <modelVersion>4.0.0</modelVersion>
+          
+  
+  
+  <groupId>com.mycompany.app</groupId>
+          
+  
+  
+  <artifactId>practice2-archetype</artifactId>
+          
+  
+  
+  <version>1.0-SNAPSHOT</version>
+          
+  
+  
+  <packaging>pom</packaging>
+          
+  
+  
+  <properties>
+                    
+    
+    
+    <maven.compiler.source>21</maven.compiler.source>
+                    
+    
+    
+    <maven.compiler.target>21</maven.compiler.target>
+                    
+    
+    
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                
+  
+  
+  </properties>
+          
+  
+  
+  <profiles>
+                    
+    
+    
+    <profile>
+                              
+      
+      
+      <id>no-tests</id>
+                              
+      
+      
+      <properties>
+                                        
+        
+        
+        <maven.test.skip>true</maven.test.skip>
+                                    
+      
+      
+      </properties>
+                          
+    
+    
+    </profile>
+                
+  
+  
+  </profiles>
+          
+  
+  
+  <build>
+                    
+    
+    
+    <plugins>
+                              
+      
+      
+      <plugin>
+                                        
+        
+        
+        <groupId>org.apache.maven.plugins</groupId>
+                                        
+        
+        
+        <artifactId>maven-archetype-plugin</artifactId>
+                                        
+        
+        
+        <version>3.2.0</version>
+                                        
+        
+        
+        <executions>
+                                                  
+          
+          
+          <execution>
+                                                            
+            
+            
+            <id>default-generate-sources</id>
+                                                            
+            
+            
+            <goals>
+                                                                      
+              
+              
+              <goal>jar</goal>
+                                                                  
+            
+            
+            </goals>
+                                                        
+          
+          
+          </execution>
+                                              
+        
+        
+        </executions>
+                                    
+      
+      
+      </plugin>
+                          
+    
+    
+    </plugins>
+                
+  
+  
+  </build>
+          
+  
+  
+  <!--    <build>-->
+      
+  
+  
+  <!--        <pluginManagement>-->
+      
+  
+  
+  <!--            <plugins>-->
+      
+  
+  
+  <!--                <plugin>-->
+      
+  
+  
+  <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+      
+  
+  
+  <!--                    <artifactId>maven-resources-plugin</artifactId>-->
+      
+  
+  
+  <!--                    <version>3.2.0</version>-->
+      
+  
+  
+  <!--                    <executions>-->
+      
+  
+  
+  <!--                        <execution>-->
+      
+  
+  
+  <!--                            <id>copy-resources</id>-->
+      
+  
+  
+  <!--                            <phase>compile</phase> &lt;!&ndash; Вкажіть фазу, коли ви хочете виконати копіювання &ndash;&gt;-->
+      
+  
+  
+  <!--                            <goals>-->
+      
+  
+  
+  <!--                                <goal>copy-resources</goal>-->
+      
+  
+  
+  <!--                            </goals>-->
+      
+  
+  
+  <!--                            <configuration>-->
+      
+  
+  
+  <!--                                <outputDirectory>${project.build.directory}/copied-resources</outputDirectory>-->
+      
+  
+  
+  <!--                                <resources>-->
+      
+  
+  
+  <!--                                    <resource>-->
+      
+  
+  
+  <!--                                        <directory>src/main/resources</directory> &lt;!&ndash; Вихідний каталог &ndash;&gt;-->
+      
+  
+  
+  <!--                                        <includes>-->
+      
+  
+  
+  <!--                                            <include>**/*.properties</include> &lt;!&ndash; Файли для копіювання &ndash;&gt;-->
+      
+  
+  
+  <!--                                        </includes>-->
+      
+  
+  
+  <!--                                    </resource>-->
+      
+  
+  
+  <!--                                </resources>-->
+      
+  
+  
+  <!--                            </configuration>-->
+      
+  
+  
+  <!--                        </execution>-->
+      
+  
+  
+  <!--                    </executions>-->
+      
+  
+  
+  <!--                </plugin>-->
+      
+  
+  
+  <!--            </plugins>-->
+      
+  
+  
+  <!--        </pluginManagement>-->
+      
+  
+  
+  <!--        &lt;!&ndash; To use the plugin goals in your POM or parent POM &ndash;&gt;-->
+      
+  
+  
+  <!--        <plugins>-->
+      
+  
+  
+  <!--            <plugin>-->
+      
+  
+  
+  <!--                <groupId>org.apache.maven.plugins</groupId>-->
+      
+  
+  
+  <!--                <artifactId>maven-resources-plugin</artifactId>-->
+      
+  
+  
+  <!--            </plugin>-->
+      
+  
+  
+  <!--        </plugins>-->
+      
+  
+  
+  <!--    </build>-->
+      
+  
+  
+  <modules>
+              
+    
+    
+    <module>user-database-util</module>
+              
+    
+    
+    <module>user-checking-unit</module>
+          
+    
+    <module>user-interface-util</module>
+      
+  </modules>
+    
+
+</project>

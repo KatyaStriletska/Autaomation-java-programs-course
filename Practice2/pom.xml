@@ -13,7 +13,6 @@
         <module>user-interface-util</module>
     </modules>
     <dependencies>
-        <!-- Ваші залежності -->
     </dependencies>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

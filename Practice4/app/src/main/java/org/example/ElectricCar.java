@@ -1,13 +1,13 @@
 package org.example;
 
+@GenerateElement(CarTypes.ELECTRIC)
 public class ElectricCar implements Car {
-    //    @NotNull
+    @NotNull
     private String model;
 
-    //    @NotNull
-//    @MaxLength(10)
+    @NotNull
     private String color;
-
+    @NotNull
     private int age;
     private boolean isBought;
 
@@ -30,7 +30,19 @@ public class ElectricCar implements Car {
         this.model = model;
         this.color = color;
         this.age = age;
-        this.isBought = false;
+    }
+    public ElectricCar(){}
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @MinAge(7)

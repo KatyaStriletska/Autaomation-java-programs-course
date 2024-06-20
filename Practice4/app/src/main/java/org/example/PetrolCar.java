@@ -1,18 +1,15 @@
 package org.example;
 
-@GenerateElement
+@GenerateElement(CarTypes.PETROL)
 public class PetrolCar implements Car {
+    @NotNull
     private String model;
     private String color;
+    @NotNull
     private int age;
     private boolean isBought;
 
-    public PetrolCar(String model, String color, int age) {
-        this.model = model;
-        this.color = color;
-        this.age = age;
-        this.isBought = false;
-    }
+
     @Override
     public String getModel() {
         return model;
@@ -27,6 +24,19 @@ public class PetrolCar implements Car {
     public int getAge() {
         return age;
     }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     @MinAge()
     @Override
     public boolean buyCar() {

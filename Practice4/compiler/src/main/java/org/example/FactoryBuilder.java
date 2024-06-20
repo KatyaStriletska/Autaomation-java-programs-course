@@ -32,7 +32,8 @@ class FactoryBuilder {
                     .beginControlFlow("switch(type)");
             for (ElementInfo elementInfo : input.get(key)) {
                 methodBuilder
-                        .addStatement("case $S: return new $T()", elementInfo.tag, elementInfo.className);
+                        .addStatement("case $S: return new $T()", elementInfo.className.toString(), elementInfo.className);
+
             }
 
             methodBuilder

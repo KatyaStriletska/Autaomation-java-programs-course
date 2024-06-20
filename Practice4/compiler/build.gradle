@@ -1,6 +1,4 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java-library'
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
@@ -20,4 +18,19 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+tasks.register("generateProcessorConfig") {
+    doLast {
+        def servicesDir = file("src/main/resources/META-INF/services")
+        if (!servicesDir.exists()) {
+            servicesDir.mkdirs()
+        }
+
+        def processorFile = file("src/main/resources/META-INF/services/javax.annotation.processing.Processor")
+        processorFile.text = "org.example.GenerateProcessor"
+    }
+}
+tasks.named("compileJava") {
+    dependsOn("generateProcessorConfig")
 }

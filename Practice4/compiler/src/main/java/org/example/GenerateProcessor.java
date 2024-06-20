@@ -12,6 +12,9 @@ import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.util.*;
 
+
+@SupportedAnnotationTypes("org.example.GenerateBuilder")
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
 public class GenerateProcessor extends AbstractProcessor {
     private Filer filer;
     private Messager messager;
@@ -24,30 +27,39 @@ public class GenerateProcessor extends AbstractProcessor {
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        messager.printMessage(Diagnostic.Kind.NOTE, "Starting annotation processing...");
+
         Map<ClassName, List<ElementInfo>> result = new HashMap<>();
-        for (Element annotatedElement : roundEnvironment.getElementsAnnotatedWith(Generate.class)) {
+        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(Generate.class)) {
+            messager.printMessage(Diagnostic.Kind.NOTE, "Processing @Generate on " + annotatedElement.toString());
             if (annotatedElement.getKind() != ElementKind.INTERFACE) {
-                error("Only interface can be annotated with AutoFactory", annotatedElement);
+                error("Only interfaces can be annotated with @Generate", annotatedElement);
                 return true;
             }
             TypeElement typeElement = (TypeElement) annotatedElement;
             ClassName className = ClassName.get(typeElement);
-            if (!result.containsKey(className)) {
-                result.put(className, new ArrayList<>());
-            }
+            result.putIfAbsent(className, new ArrayList<>());
         }
-        for (Element annotatedElement : roundEnvironment.getElementsAnnotatedWith(Generate.class)) {
+
+        for (Element annotatedElement : roundEnv.getElementsAnnotatedWith(GenerateElement.class)) {
             if (annotatedElement.getKind() != ElementKind.CLASS) {
-                error("Only class can be annotated with CarInterface", annotatedElement);
+                error("Only classes can be annotated with @GenerateElement", annotatedElement);
                 return true;
             }
-            GenerateElement carElement = annotatedElement.getAnnotation(GenerateElement.class);
+            GenerateElement autoElement = annotatedElement.getAnnotation(GenerateElement.class);
             TypeElement typeElement = (TypeElement) annotatedElement;
             ClassName className = ClassName.get(typeElement);
             List<? extends TypeMirror> list = typeElement.getInterfaces();
-
+            for (TypeMirror typeMirror : list) {
+                ClassName typeName = getName(typeMirror);
+                if (result.containsKey(typeName)) {
+                    result.get(typeName).add(new ElementInfo(className));
+                    break;
+                }
+            }
         }
+
         try {
             new FactoryBuilder(filer, result).generate();
         } catch (IOException e) {
@@ -84,4 +96,8 @@ public class GenerateProcessor extends AbstractProcessor {
     private void error(String message) {
         messager.printMessage(Diagnostic.Kind.ERROR, message);
     }
+    private void note(String message) {
+        messager.printMessage(Diagnostic.Kind.NOTE, message);
+    }
+
 }

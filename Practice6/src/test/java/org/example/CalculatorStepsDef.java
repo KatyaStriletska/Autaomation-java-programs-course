@@ -1,9 +1,8 @@
-package org.example.CucumberTest;
+package org.example;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.SimpleCalculator;
 
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 

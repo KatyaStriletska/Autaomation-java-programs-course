@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.*;
 
@@ -17,16 +17,20 @@ class SimpleCalculatorTest {
         var calculator = new SimpleCalculator();
         assertEquals(20, calculator.multiplication(10, 2));
     }
-
     @Test
+    @DisplayName("Testing whether 10 / 5 = 2")
     void divisionTwoNumbers() {
         var calculator = new SimpleCalculator();
         assumeTrue(calculator.division(10, 5) == 2);
-        assertThrows(IllegalArgumentException.class,
-                () -> {
-                    calculator.division(10, 0);
-                },
-                "Second number must be more then 0!");
+    }
+    @Test
+    void divisionOnNull() {
+        var calculator = new SimpleCalculator();
+        assumeTrue(calculator.division(10, 5) == 2);
+        assertThatThrownBy(() ->
+                calculator.division(10, 0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Second number must be more then 0!");
     }
 
     @ParameterizedTest(name = "Testing many variants for multiplication")
